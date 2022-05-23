@@ -1,0 +1,16 @@
+node('jdk11'){
+    
+    stage('sourcecode'){
+        git 'https://github.com/spring-petclinic/spring-framework-petclinic.git'
+    }
+   
+    stage('build'){
+        sh  'mvn package'
+    }
+   
+    stage('archieve the arifact'){
+        archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
+        junit '**/surefire-reports/*.xml'
+    }
+
+}
