@@ -5,13 +5,12 @@ node('jdk11'){
     }
    
     stage('build'){
-         withSonarQubeEnv('SONAR') {
-                sh script: 'mvn clean package sonar:sonar'
+        
     }
    
     stage('archieve the arifact'){
         archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
         junit '**/surefire-reports/*.xml'
-    }
+    } 
 
 }
