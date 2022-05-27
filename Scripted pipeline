@@ -5,7 +5,8 @@ node('jdk11'){
     }
    
     stage('build'){
-        sh  'mvn package'
+         withSonarQubeEnv('SONAR') {
+                sh script: 'mvn clean package sonar:sonar'
     }
    
     stage('archieve the arifact'){
